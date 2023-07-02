@@ -1,0 +1,10 @@
+/* Нейминг намеренный, подчеркивает название проекта */
+.mesto {
+  width: 282px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}

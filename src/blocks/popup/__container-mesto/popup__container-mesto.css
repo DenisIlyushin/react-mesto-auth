@@ -1,0 +1,8 @@
+.popup__container-mesto {
+  position: relative;
+  max-width: 75vw;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  background-color: transparent;
+}

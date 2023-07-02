@@ -1,0 +1,7 @@
+.mesto__like-container {
+  margin: 22px 20px 22px auto;
+  width: 22px;
+  max-height: 35px;
+  display: flex;
+  flex-direction: column;
+}

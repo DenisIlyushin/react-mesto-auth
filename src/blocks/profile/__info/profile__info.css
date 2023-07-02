@@ -1,0 +1,22 @@
+.profile__info {
+  margin-left: 30px;
+  display: grid;
+  grid-template-areas:
+    "user-name edit-button"
+    "user-job user-job";
+  grid-template-columns: 1fr 24px;
+  row-gap: 7px;
+  column-gap: 18px;
+  color: var(--font-color-light, #fff);
+}
+
+@media screen and (max-width: 918px) {
+  .profile__info {
+    margin: 26px auto 32px;
+    grid-template-areas:
+    ". user-name edit-button"
+    "user-job user-job user-job";
+    column-gap: 10px;
+    grid-template-columns: 18px 1fr 18px;
+  }
+}

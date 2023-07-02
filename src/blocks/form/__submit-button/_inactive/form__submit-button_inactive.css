@@ -1,0 +1,8 @@
+.form__submit-button_inactive {
+  background: transparent;
+  border: 1px solid var(--background-color, #000);
+  box-sizing: border-box;
+  color: var(--background-color, #000);
+  opacity: 0.2;
+  pointer-events: none;
+}

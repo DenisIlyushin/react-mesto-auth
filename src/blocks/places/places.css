@@ -1,0 +1,5 @@
+.places {
+  max-width: var(--max-block-width);
+  margin: var(--places-spacer-top) auto 0;
+  padding: 0;
+}

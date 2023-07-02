@@ -1,0 +1,13 @@
+.header {
+  width: 100%;
+  margin-top: var(--header-spacer-top);
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(
+    --header-logo-border-color,
+    rgba(84, 84, 84, 0.7)
+    );
+  background-clip: padding-box;
+}

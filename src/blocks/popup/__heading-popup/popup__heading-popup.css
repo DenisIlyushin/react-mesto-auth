@@ -1,0 +1,12 @@
+.popup__heading-popup {
+  max-width: 240px;
+  margin: 10px 0 0 0;
+  padding: 0;
+  color: var(--font-color-light, #fff);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
