@@ -2,6 +2,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Main from './Main.jsx';
 import {useEffect, useState} from 'react';
+import {Route, Switch} from 'react-router-dom'
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import ImagePopup from './ImagePopup.jsx';
 import api from '../utils/api.js';
@@ -9,6 +10,9 @@ import EditProfilePopup from './EditProfilePopup.jsx';
 import EditAvatarPopup from './EditAvatarPopup.jsx';
 import AddMestoPopup from './AddMestoPopup.jsx';
 import ConfirmMestoDeletePopup from './ConfirmMestoDeletePopup.jsx';
+import ProtectedRoute from './ProtectedRoute.jsx';
+import Register from './Register.jsx';
+import Login from './Login.jsx';
 
 function App() {
   //обработка попапов
@@ -31,7 +35,11 @@ function App() {
       })
       .catch(console.log)
   }, [])
+  // обработка авторизации
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+
+  // обработка попапов
   function closeAllPopups() {
     setIsUpdateAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -52,6 +60,7 @@ function App() {
     setIsAddMestoPopupOpen(true)
   }
 
+  // логика
   function handleLikeClick(card) {
     api.likeCard(card._id)
       .then((newCard) => {
@@ -117,48 +126,84 @@ function App() {
       .finally(() => setIsLoading(false))
   }
 
-  return (<CurrentUserContext.Provider value={user}>
-    <Header/>
-    <Main
-      onUserAvatarEdit={handleUpdateAvatarPopup}
-      onUserProfileEdit={handleEditProfilePopup}
-      onMestoAdd={handleAddMestoPopup}
-      onMestoDelete={handleDeleteConfirm}
-      onMestoShow={setSelectedCard}
-      onMestoLike={handleLikeClick}
-      onMestoDislike={handleDislikeClick}
-      cards={initialCards}
-    />
-    <Footer/>
-    <EditAvatarPopup
-      isOpen={isUpdateAvatarPopupOpen}
-      onClose={closeAllPopups}
-      onUpdate={handleAvatarUpdate}
-    />
-    <EditProfilePopup
-      isOpen={isEditProfilePopupOpen}
-      onClose={closeAllPopups}
-      onUpdate={handleProfileUpdate}
-    />
-    <AddMestoPopup
-      isOpen={isAddMestoPopupOpen}
-      onClose={closeAllPopups}
-      onSubmit={handleMestoAdd}
-      processStatus={isLoading}
-    />
-    <ConfirmMestoDeletePopup
-      isOpen={isDeleteMestoPopupOpen}
-      onClose={closeAllPopups}
-      onSubmit={handleDeleteMesto}
-      card={cardToDelete}
-      processStatus={isLoading}
-    />
-    <ImagePopup
-      popupType={'show-mesto'}
-      card={selectedCard}
-      onClose={closeAllPopups}
-    />
-  </ CurrentUserContext.Provider>);
+  // обработка авторизации и деавторизации пользователя
+  function handleRegistration() {
+    console.log('тык')
+  }
+
+  function handleLogin() {
+    console.log('пык')
+  }
+
+  return (
+    <CurrentUserContext.Provider value={user}>
+      <Header/>
+      <Switch>
+        <Route
+          path='/sign-in'
+        >
+          {console.log('тут APP')}
+          <Login
+            onLogin={handleLogin}
+            title={'Вход'}
+          />
+        </Route>
+        <Route
+          path='/sign-up'
+        >
+          <Register
+            onRegistration={handleRegistration}
+            title={'Регистрация'}
+            // tip={<></>}
+          />
+        </Route>
+        <Route
+          path='/'
+        >
+          <ProtectedRoute
+            component={Main}
+            isloggedIn={isLoggedIn}
+            onUserAvatarEdit={handleUpdateAvatarPopup}
+            onUserProfileEdit={handleEditProfilePopup}
+            onMestoAdd={handleAddMestoPopup}
+            onMestoDelete={handleDeleteConfirm}
+            onMestoShow={setSelectedCard}
+            onMestoLike={handleLikeClick}
+            onMestoDislike={handleDislikeClick}
+            cards={initialCards}
+          />
+        </Route>
+      </Switch>
+      <Footer/>
+      <EditAvatarPopup
+        isOpen={isUpdateAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdate={handleAvatarUpdate}
+      />
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdate={handleProfileUpdate}
+      />
+      <AddMestoPopup
+        isOpen={isAddMestoPopupOpen}
+        onClose={closeAllPopups}
+        onSubmit={handleMestoAdd}
+        processStatus={isLoading}
+      />
+      <ConfirmMestoDeletePopup
+        isOpen={isDeleteMestoPopupOpen}
+        onClose={closeAllPopups}
+        onSubmit={handleDeleteMesto}
+        card={cardToDelete}
+        processStatus={isLoading}
+      />
+      <ImagePopup
+        popupType={'show-mesto'}
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
+    </ CurrentUserContext.Provider>);
 }
 
 export default App;
