@@ -1,0 +1,15 @@
+.header__auth {
+  margin-top: 5px;
+  color: var(--font-color-light, #fff);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s linear;
+}
+
+.header__auth:hover {
+  opacity: 0.6;
+}

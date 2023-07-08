@@ -37,7 +37,7 @@ function App() {
   }, [])
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [userEmail, setUserEmail] = useState(null)
 
   // обработка попапов
   function closeAllPopups() {
@@ -135,74 +135,90 @@ function App() {
     console.log('пык')
   }
 
+  function handleSignOut() {
+    console.log('хрюк')
+  }
+
   return (
     <CurrentUserContext.Provider value={user}>
-      <Header/>
-      <Switch>
-        <Route
-          path='/sign-in'
-        >
-          {console.log('тут APP')}
-          <Login
-            onLogin={handleLogin}
-            title={'Вход'}
-          />
-        </Route>
-        <Route
-          path='/sign-up'
-        >
-          <Register
-            onRegistration={handleRegistration}
-            title={'Регистрация'}
-            // tip={<></>}
-          />
-        </Route>
-        <Route
-          path='/'
-        >
-          <ProtectedRoute
-            component={Main}
-            isloggedIn={isLoggedIn}
-            onUserAvatarEdit={handleUpdateAvatarPopup}
-            onUserProfileEdit={handleEditProfilePopup}
-            onMestoAdd={handleAddMestoPopup}
-            onMestoDelete={handleDeleteConfirm}
-            onMestoShow={setSelectedCard}
-            onMestoLike={handleLikeClick}
-            onMestoDislike={handleDislikeClick}
-            cards={initialCards}
-          />
-        </Route>
-      </Switch>
-      <Footer/>
-      <EditAvatarPopup
-        isOpen={isUpdateAvatarPopupOpen}
-        onClose={closeAllPopups}
-        onUpdate={handleAvatarUpdate}
-      />
-      <EditProfilePopup
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-        onUpdate={handleProfileUpdate}
-      />
-      <AddMestoPopup
-        isOpen={isAddMestoPopupOpen}
-        onClose={closeAllPopups}
-        onSubmit={handleMestoAdd}
-        processStatus={isLoading}
-      />
-      <ConfirmMestoDeletePopup
-        isOpen={isDeleteMestoPopupOpen}
-        onClose={closeAllPopups}
-        onSubmit={handleDeleteMesto}
-        card={cardToDelete}
-        processStatus={isLoading}
-      />
-      <ImagePopup
-        popupType={'show-mesto'}
-        card={selectedCard}
-        onClose={closeAllPopups}
-      />
+      <div
+        className="page"
+      >
+        <Header
+          profileEmail={userEmail}
+          onSignOut={handleSignOut}
+        />
+        <Switch>
+          <Route
+            path="/sign-in"
+          >
+            <Login
+              onLogin={handleLogin}
+              title={'Вход'}
+              buttonTitle={'Войти'}
+            />
+          </Route>
+          <Route
+            path="/sign-up"
+          >
+            <Register
+              onRegistration={handleRegistration}
+              title={'Регистрация'}
+              buttonTitle={'Зарегистрироваться'}
+              tip={
+                <p className={'auth__tip'}>
+                  Уже зарегистированы? <a className="auth__link">Войти</a>
+                </p>
+              }
+            />
+          </Route>
+          <Route
+            path="/"
+          >
+            <ProtectedRoute
+              component={Main}
+              isloggedIn={isLoggedIn}
+              onUserAvatarEdit={handleUpdateAvatarPopup}
+              onUserProfileEdit={handleEditProfilePopup}
+              onMestoAdd={handleAddMestoPopup}
+              onMestoDelete={handleDeleteConfirm}
+              onMestoShow={setSelectedCard}
+              onMestoLike={handleLikeClick}
+              onMestoDislike={handleDislikeClick}
+              cards={initialCards}
+            />
+          </Route>
+        </Switch>
+        <Footer/>
+        <EditAvatarPopup
+          isOpen={isUpdateAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdate={handleAvatarUpdate}
+        />
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdate={handleProfileUpdate}
+        />
+        <AddMestoPopup
+          isOpen={isAddMestoPopupOpen}
+          onClose={closeAllPopups}
+          onSubmit={handleMestoAdd}
+          processStatus={isLoading}
+        />
+        <ConfirmMestoDeletePopup
+          isOpen={isDeleteMestoPopupOpen}
+          onClose={closeAllPopups}
+          onSubmit={handleDeleteMesto}
+          card={cardToDelete}
+          processStatus={isLoading}
+        />
+        <ImagePopup
+          popupType={'show-mesto'}
+          card={selectedCard}
+          onClose={closeAllPopups}
+        />
+      </div>
     </ CurrentUserContext.Provider>);
 }
 
