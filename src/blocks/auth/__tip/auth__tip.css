@@ -1,3 +1,13 @@
 .auth__tip {
-
+  padding: 0;
+  margin: 15px 0 0;
+  width: 100%;
+  height: 17px;
+  text-decoration: none;
+  color: var(--font-color-light, #fff);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
 }

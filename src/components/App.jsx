@@ -2,7 +2,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Main from './Main.jsx';
 import {useEffect, useState} from 'react';
-import {Route, Switch} from 'react-router-dom'
+import {Link, Route, Switch} from 'react-router-dom'
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import ImagePopup from './ImagePopup.jsx';
 import api from '../utils/api.js';
@@ -13,6 +13,7 @@ import ConfirmMestoDeletePopup from './ConfirmMestoDeletePopup.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import Register from './Register.jsx';
 import Login from './Login.jsx';
+import InfoTooltipOpen from './InfoTooltipOpen.jsx';
 
 function App() {
   //обработка попапов
@@ -20,11 +21,13 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddMestoPopupOpen, setIsAddMestoPopupOpen] = useState(false);
   const [isDeleteMestoPopupOpen, setIsDeleteMestoPopupOpen] = useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   //обработка данных
   const [selectedCard, setSelectedCard] = useState(null);
   const [initialCards, setInitialCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
+  const [isAuthSuccessful, setIsAuthSuccessful] = useState(false)
   // контекст пользователя
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -37,7 +40,7 @@ function App() {
   }, [])
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState(null)
+  const [userEmail, setUserEmail] = useState(null) // думаю можно из user тащить эту информацию. надо будет проверить
 
   // обработка попапов
   function closeAllPopups() {
@@ -150,7 +153,7 @@ function App() {
         />
         <Switch>
           <Route
-            path="/sign-in"
+            path='/sign-in'
           >
             <Login
               onLogin={handleLogin}
@@ -167,7 +170,13 @@ function App() {
               buttonTitle={'Зарегистрироваться'}
               tip={
                 <p className={'auth__tip'}>
-                  Уже зарегистированы? <a className="auth__link">Войти</a>
+                  Уже зарегистрированы?&nbsp;
+                  <Link
+                    className='auth__link'
+                    to='/sign-in'
+                  >
+                    Войти
+                  </Link>
                 </p>
               }
             />
@@ -217,6 +226,12 @@ function App() {
           popupType={'show-mesto'}
           card={selectedCard}
           onClose={closeAllPopups}
+        />
+        <InfoTooltipOpen
+          onClose={closeAllPopups}
+          popupType='infoTooltip'
+          isOpen={isInfoTooltipOpen}
+          isSuccess={isAuthSuccessful}
         />
       </div>
     </ CurrentUserContext.Provider>);

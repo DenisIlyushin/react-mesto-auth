@@ -30,6 +30,9 @@
 @import url(./blocks/popup/__container-mesto/popup__container-mesto.css);
 @import url(./blocks/popup/__image-popup/popup__image-popup.css);
 @import url(./blocks/popup/__heading-popup/popup__heading-popup.css);
+@import url(./blocks/popup/__tooltip-header/popup__tooltip-header.css);
+@import url(./blocks/popup/__tooltip-image/popup__tooltip-image.css);
+@import url(./blocks/popup/__tooltip-content/popup__tooltip-content.css);
 @import url(./blocks/form/form.css);
 @import url(./blocks/form/__title/form__title.css);
 @import url(./blocks/form/__input-label/form__input-label.css);
