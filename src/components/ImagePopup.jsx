@@ -1,4 +1,4 @@
-import useCloseOnEsc from '../utils/useCloseOnEsc.jsx';
+import useCloseOnEsc from '../hooks/useCloseOnEsc.jsx';
 
 export default function ImagePopup(
   {

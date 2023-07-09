@@ -1,4 +1,4 @@
-import useCloseOnEsc from '../utils/useCloseOnEsc.jsx';
+import useCloseOnEsc from '../hooks/useCloseOnEsc.jsx';
 import successImage from '../images/tooltip-success.svg';
 import failImage from '../images/tooltip-fail.svg'
 
