@@ -32,7 +32,7 @@ export default function Login(
       />
       <input
         className='auth__input'
-        type='text'
+        type='password'
         name='signin_password'
         placeholder='Пароль'
         value={password}

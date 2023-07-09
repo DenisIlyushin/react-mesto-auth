@@ -34,7 +34,7 @@ export default function Register(
       />
       <input
         className='auth__input'
-        type='text'
+        type='password'
         name='registration_password'
         placeholder='Пароль'
         value={password}
