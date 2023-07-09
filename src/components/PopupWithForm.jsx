@@ -7,6 +7,7 @@ export default function PopupWithForm(
     submitText,
     children,
     isOpen,
+    isValid,
     onClose,
     onSubmit,
   }
@@ -45,7 +46,10 @@ export default function PopupWithForm(
           <h2 className="form__title">{popupTitle}</h2>
           {children}
           <button
-            className="form__submit-button"
+            className={
+              `form__submit-button 
+               ${isValid ? '' : 'form__submit-button_inactive'}`
+            }
             type="submit"
           >
             {submitText}

@@ -29,7 +29,7 @@ export default function Register(
       <label className="form__input-label">
         <input
           className="form__input form__input_type_auth"
-          id="email"
+          id="registerEmail"
           type="email"
           name="email"
           placeholder="Email"
@@ -45,6 +45,7 @@ export default function Register(
       <label className="form__input-label">
         <input
           className="form__input form__input_type_auth"
+          id="registerPassword"
           type="password"
           name="password"
           placeholder="Пароль"

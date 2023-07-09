@@ -1,21 +1,27 @@
 import PopupWithForm from './PopupWithForm.jsx';
 import {useEffect, useState} from 'react';
+import useValidate from '../hooks/useValidate.jsx';
 
 export default function AddMestoPopup({ isOpen, onClose, onSubmit, processStatus }) {
-  const [name, setName] = useState('')
-  const [link, setLink] = useState('#')
+  const {values, handleChange, errors, isValid, resetForm, setValues} = useValidate()
 
   useEffect(() => {
-    setName('');
-    setLink('')
+    setValues({
+      name: '',
+      link: ''
+    })
+    if (!isOpen) {
+      resetForm();
+    }
   }, [isOpen])
 
   function handleSubmit(event) {
     event.preventDefault();
     onSubmit({
-      name: name,
-      link: link
-    })
+      name: values.name,
+      link: values.link
+    });
+    resetForm()
   }
 
   return (
@@ -24,6 +30,7 @@ export default function AddMestoPopup({ isOpen, onClose, onSubmit, processStatus
       popupTitle={'Новое место'}
       submitText={processStatus ? 'Сохранение' : 'Создать'}
       isOpen={isOpen}
+      isValid={isValid}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
@@ -37,10 +44,14 @@ export default function AddMestoPopup({ isOpen, onClose, onSubmit, processStatus
           required
           minLength="2"
           maxLength="30"
-          value={name || ''}
-          onChange={(event) => setName(event.target.value)}
+          value={values.name || ''}
+          onChange={handleChange}
         />
-        <span className="form__input-error mestoName-error"></span>
+        <span
+          className={`form__input-error ${isValid ? '' : 'form__input-error_active'}`}
+        >
+          {errors.name}
+        </span>
       </label>
       <label className="form__input-label">
         <input
@@ -50,10 +61,14 @@ export default function AddMestoPopup({ isOpen, onClose, onSubmit, processStatus
           type="url"
           placeholder="Ссылка на картинку"
           required
-          value={link || ''}
-          onChange={(event) => setLink(event.target.value)}
+          value={values.link || ''}
+          onChange={handleChange}
         />
-        <span className="form__input-error mestoUrl-error"></span>
+        <span
+          className={`form__input-error ${isValid ? '' : 'form__input-error_active'}`}
+        >
+          {errors.link}
+        </span>
       </label>
     </PopupWithForm>
   )

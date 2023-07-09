@@ -27,7 +27,7 @@ export default function Login(
       <label className="form__input-label">
         <input
           className="form__input form__input_type_auth"
-          id="email"
+          id="loginEmail"
           type="email"
           name="email"
           placeholder="Email"
@@ -44,7 +44,7 @@ export default function Login(
       <label className="form__input-label">
         <input
           className="form__input form__input_type_auth"
-          type="password"
+          type="loginPassword"
           name="password"
           placeholder="Пароль"
           value={values.password || ''}

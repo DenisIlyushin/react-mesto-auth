@@ -1,23 +1,36 @@
 import PopupWithForm from './PopupWithForm.jsx';
 import {CurrentUserContext} from '../context/CurrentUserContext.jsx';
 import {useContext, useEffect, useState} from 'react';
+import useValidate from '../hooks/useValidate.jsx';
 
-export default function EditProfilePopup({ isOpen, onClose, onUpdate, processStatus }) {
+export default function EditProfilePopup(
+  {
+    isOpen,
+    onClose,
+    onUpdate,
+    processStatus
+  }) {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState('');
-  const [job, setJob] = useState('');
+  const {values, handleChange, errors, isValid, resetForm, setValues} = useValidate()
 
   useEffect(() => {
-    setName(currentUser ? currentUser.name : '');
-    setJob(currentUser ? currentUser.about : '');
+    setValues(
+      currentUser
+        ? {name: currentUser.name, job: currentUser.about}
+        : {name: '', job: ''}
+    );
+    if (!isOpen) {
+      resetForm();
+    }
   }, [currentUser, isOpen]);
 
   function handleSubmit(event) {
     event.preventDefault();
     onUpdate({
-      name: name,
-      about: job
-    })
+      name: values.name,
+      about: values.job
+    });
+    resetForm()
   }
 
   return (
@@ -26,6 +39,7 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdate, processSta
       popupTitle={'Редактировать профиль'}
       submitText={processStatus ? 'Сохранение' : 'Сохранить'}
       isOpen={isOpen}
+      isValid={isValid}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
@@ -39,10 +53,14 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdate, processSta
           required
           minLength="2"
           maxLength="40"
-          value={name || ''}
-          onChange={(event) => setName(event.target.value)}
+          value={values.name || ''}
+          onChange={handleChange}
         />
-        <span className="form__input-error userName-error"></span>
+        <span
+          className={`form__input-error ${isValid ? '' : 'form__input-error_active'}`}
+        >
+          {errors.name}
+        </span>
       </label>
       <label className="form__input-label">
         <input
@@ -54,10 +72,14 @@ export default function EditProfilePopup({ isOpen, onClose, onUpdate, processSta
           required
           minLength="2"
           maxLength="200"
-          value={job || ''}
-          onChange={(event) => setJob(event.target.value)}
+          value={values.job || ''}
+          onChange={handleChange}
         />
-        <span className="form__input-error userJob-error"></span>
+        <span
+          className={`form__input-error ${isValid ? '' : 'form__input-error_active'}`}
+        >
+          {errors.job}
+        </span>
       </label>
     </PopupWithForm>
   )

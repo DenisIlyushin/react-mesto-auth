@@ -10,6 +10,8 @@ export default function useValidate() {
     setIsValid(event.target.closest('form').checkValidity())
     setValues({...values, [name]: value})
     setErrors({...errors, [name]: event.target.validationMessage})
+    console.log('err', event.target.validationMessage)
+    console.log(values, errors, isValid)
   };
 
   const resetForm = () => {
@@ -22,10 +24,10 @@ export default function useValidate() {
     values,
     errors,
     isValid,
-    handleChange,
-    resetForm,
     setValues,
     setErrors,
-    setIsValid
+    setIsValid,
+    handleChange,
+    resetForm
   }
 }
