@@ -1,8 +1,8 @@
 import {useState} from 'react';
 
 export default function useValidate() {
-  const [values, setValues] = useState({})
-  const [errors, setErrors] = useState({})
+  const [values, setValues] = useState({});
+  const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false)
 
   const handleChange = (event) => {
