@@ -13,7 +13,6 @@ export default function Register(
   const [password, setPassword] = useState('');
 
   function handleSubmit() {
-    console.log('Forwarding register to App.JSX', email, password)
     onRegistration(email, password)
   }
 

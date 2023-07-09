@@ -134,19 +134,13 @@ function App() {
 
   // обработка авторизации и деавторизации пользователя
   function handleRegistration(email, password) {
-    console.log('Registering...')
     auth.signup(email, password)
       .then((response) => {
-        console.log(
-          `Success! Registerd as ${response.data.email} with pwd ${password}. 
-           User id is ${response.data._id}`
-        );
         setIsAuthSuccessful(true);
         setIsInfoTooltipOpen(true);
         history.push('/sign-in');
       })
       .catch((error) => {
-        console.log(`Registration failed with response ${error}`)
         setIsAuthSuccessful(false);
         setIsInfoTooltipOpen(true);
         console.log(error)
@@ -154,12 +148,8 @@ function App() {
   }
 
   function handleLogin(email, password) {
-    console.log('Logging in...')
     auth.signin(email, password)
       .then(({token}) => {
-        console.log(
-          `Success! Got your JWT token ${token}`
-        );
         if (token) {
           localStorage.setItem('token', token);
           setIsLoggedIn(true);
@@ -167,7 +157,6 @@ function App() {
         }
       })
       .catch((error) => {
-        console.log(`Loggin in failed with response ${error}`)
         setIsAuthSuccessful(false);
         setIsInfoTooltipOpen(true);
         console.log(error)
@@ -186,7 +175,6 @@ function App() {
     if (token) {
       auth.me(token)
         .then((response) => {
-          console.log('Logged in: ', response.data)
           setIsLoggedIn(true);
           setUserEmail(response.data.email);
           history.push('/');
