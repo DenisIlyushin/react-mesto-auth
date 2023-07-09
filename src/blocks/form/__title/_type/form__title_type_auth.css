@@ -1,0 +1,7 @@
+.form__title_type_auth {
+  margin: 0 0 50px 0;
+  padding: 0;
+  color: var(--font-color-light, #fff);
+  font-style: normal;
+  text-align: center;
+}

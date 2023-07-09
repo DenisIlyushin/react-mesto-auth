@@ -34,9 +34,12 @@
 @import url(./blocks/popup/__tooltip-image/popup__tooltip-image.css);
 @import url(./blocks/popup/__tooltip-content/popup__tooltip-content.css);
 @import url(./blocks/form/form.css);
+@import url(./blocks/form/_type/form_type_auth.css);
 @import url(./blocks/form/__title/form__title.css);
+@import url(./blocks/form/__title/_type/form__title_type_auth.css);
 @import url(./blocks/form/__input-label/form__input-label.css);
 @import url(./blocks/form/__input/form__input.css);
+@import url(./blocks/form/__input/_type/form__input_type_auth.css);
 @import url(./blocks/form/__input/_type/form__input_type_username.css);
 @import url(./blocks/form/__input/_type/form__input_type_user-job.css);
 @import url(./blocks/form/__input/_type/form__input_type_mesto-heading.css);
@@ -47,6 +50,7 @@
 @import url(./blocks/form/__submit-button/form__submit-button.css);
 @import url(./blocks/form/__submit-button/_inactive/form__submit-button_inactive.css);
 @import url(./blocks/form/__submit-button/_in-progress/form__submit-button_in-progress.css);
+@import url(./blocks/form/__submit-button/_type/form__submit-button_type_auth.css);
 @import url(./blocks/places/places.css);
 @import url(./blocks/places/__list/places__list.css);
 @import url(./blocks/mesto/mesto.css);

@@ -4,6 +4,8 @@ export default function Auth(
     title,
     buttonTitle,
     tip,
+    isValid,
+    isLoading,
     children,
   }
 ) {
@@ -14,15 +16,28 @@ export default function Auth(
   }
 
   return (
-    <div className='auth'>
-      <div className='auth__container'>
+    <div className="auth">
+      <div className="auth__container">
         <form
-          className='auth__form'
+          className="form form_type_auth"
           onSubmit={handleSubmit}
         >
-          <h2 className='auth__heading'>{title}</h2>
+          <h2 className="form__title form__title_type_auth">{title}</h2>
           {children}
-          <button className='auth__submit-button'>{buttonTitle}</button>
+          <button
+            className={
+              `form__submit-button 
+              form__submit-button_type_auth
+               ${isValid ? '' : 'form__submit-button_inactive'}`
+            }
+            disabled={!isValid}
+          >
+            {
+              isLoading
+                ? 'Подождите...'
+                : buttonTitle
+            }
+          </button>
           {tip}
         </form>
       </div>

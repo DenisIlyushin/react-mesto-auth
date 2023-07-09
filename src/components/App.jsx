@@ -41,7 +41,7 @@ function App() {
   }, [])
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState(null) // думаю можно из user тащить эту информацию. надо будет проверить
+  const [userEmail, setUserEmail] = useState(null)
   const history = useHistory();
 
   // обработка попапов
@@ -134,6 +134,7 @@ function App() {
 
   // обработка авторизации и деавторизации пользователя
   function handleRegistration(email, password) {
+    setIsLoading(true);
     auth.signup(email, password)
       .then((response) => {
         setIsAuthSuccessful(true);
@@ -145,9 +146,11 @@ function App() {
         setIsInfoTooltipOpen(true);
         console.log(error)
       })
+      .finally(() => setIsLoading(false))
   }
 
   function handleLogin(email, password) {
+    setIsLoading(true);
     auth.signin(email, password)
       .then(({token}) => {
         if (token) {
@@ -161,6 +164,7 @@ function App() {
         setIsInfoTooltipOpen(true);
         console.log(error)
       })
+      .finally(() => setIsLoading(false))
   }
 
   function handleSignOut() {
@@ -200,6 +204,7 @@ function App() {
               onLogin={handleLogin}
               title={'Вход'}
               buttonTitle={'Войти'}
+              isLoading={isLoading}
             />
           </Route>
           <Route
@@ -209,6 +214,7 @@ function App() {
               onRegistration={handleRegistration}
               title={'Регистрация'}
               buttonTitle={'Зарегистрироваться'}
+              isLoading={isLoading}
               tip={
                 <p className={'auth__tip'}>
                   Уже зарегистрированы?&nbsp;
