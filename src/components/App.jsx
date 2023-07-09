@@ -153,12 +153,31 @@ function App() {
       })
   }
 
-  function handleLogin() {
-    console.log('пык')
+  function handleLogin(email, password) {
+    console.log('Logging in...')
+    auth.signin(email, password)
+      .then(({token}) => {
+        console.log(
+          `Success! Got your JWT token ${token}`
+        );
+        if (token) {
+          localStorage.setItem('token', token);
+          setIsLoggedIn(true);
+          history.push('/');
+        }
+      })
+      .catch((error) => {
+        console.log(`Loggin in failed with response ${error}`)
+        setIsAuthSuccessful(false);
+        setIsInfoTooltipOpen(true);
+        console.log(error)
+      })
   }
 
   function handleSignOut() {
-    console.log('хрюк')
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    history.push('/sign-in')
   }
 
   // проверка токена
@@ -166,10 +185,10 @@ function App() {
     const token = localStorage.getItem('token');
     if (token) {
       auth.me(token)
-        .then(({email, _id}) => {
-          console.log('Logged in: ', email, _id)
+        .then((response) => {
+          console.log('Logged in: ', response.data)
           setIsLoggedIn(true);
-          setUserEmail(email);
+          setUserEmail(response.data.email);
           history.push('/');
         })
         .catch(console.log)

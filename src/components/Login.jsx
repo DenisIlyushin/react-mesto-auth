@@ -1,5 +1,5 @@
 import Auth from './Auth.jsx';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 export default function Login(
   {
@@ -12,7 +12,8 @@ export default function Login(
   const [password, setPassword] = useState('');
 
   function handleSubmit() {
-    onLogin()
+    console.log('Forwarding login to App.JSX', email, password)
+    onLogin(email, password)
   }
 
   return (
@@ -23,7 +24,7 @@ export default function Login(
     >
       <input
         className='auth__input'
-        id='email'
+        id='signin_email'
         type='text'
         name='email'
         placeholder='Email'
@@ -33,7 +34,7 @@ export default function Login(
       <input
         className='auth__input'
         type='text'
-        name='password'
+        name='signin_password'
         placeholder='Пароль'
         value={password}
         onChange={event => setPassword(event.target.value)}

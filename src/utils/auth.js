@@ -45,7 +45,7 @@ class Auth {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': "application/json",
+          'Content-Type': 'application/json',
           'Authorization' : `Bearer ${token}`}
       }
     )
@@ -58,7 +58,7 @@ const auth = new Auth({
   baseUrl: 'https://auth.nomoreparties.co',
   headers: {
     'Accept': 'application/json',
-    'Content-Type': "application/json",
+    'Content-Type': 'application/json',
   },
 })
 

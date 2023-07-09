@@ -26,7 +26,7 @@ export default function Register(
     >
       <input
         className='auth__input'
-        id='email'
+        id='registration_email'
         type='text'
         name='email'
         placeholder='Email'
@@ -36,7 +36,7 @@ export default function Register(
       <input
         className='auth__input'
         type='text'
-        name='password'
+        name='registration_password'
         placeholder='Пароль'
         value={password}
         onChange={event => setPassword(event.target.value)}

@@ -1,5 +1,6 @@
 .header__signout-button {
   background-color: transparent;
+  border: none;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
