@@ -1,6 +1,6 @@
 import PopupWithForm from './PopupWithForm.jsx';
 import {CurrentUserContext} from '../context/CurrentUserContext.jsx';
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect} from 'react';
 import useValidate from '../hooks/useValidate.jsx';
 
 export default function EditProfilePopup(
