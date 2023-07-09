@@ -1,0 +1,9 @@
+{
+  "short_name": "Mesto React App",
+  "name": "Учебный проект Mesto-react",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
