@@ -7,14 +7,14 @@ export default function useValidate() {
 
   const handleChange = (event) => {
     const {name, value} = event.target
-    setIsValid(event.target.closest('form').checkValidity())
-    setValues({...values, [name]: value})
+    setIsValid(event.target.closest('form').checkValidity());
+    setValues({...values, [name]: value});
     setErrors({...errors, [name]: event.target.validationMessage})
   };
 
   const resetForm = () => {
-    setValues({})
-    setErrors({})
+    setValues({});
+    setErrors({});
     setIsValid(false)
   }
 
