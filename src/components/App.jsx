@@ -2,7 +2,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Main from './Main.jsx';
 import {useEffect, useState} from 'react';
-import {Link, Route, Switch} from 'react-router-dom'
+import {Link, Route, Switch, useHistory} from 'react-router-dom'
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import ImagePopup from './ImagePopup.jsx';
 import api from '../utils/api.js';
@@ -14,6 +14,7 @@ import ProtectedRoute from './ProtectedRoute.jsx';
 import Register from './Register.jsx';
 import Login from './Login.jsx';
 import InfoTooltipOpen from './InfoTooltipOpen.jsx';
+import auth from '../utils/auth.js';
 
 function App() {
   //обработка попапов
@@ -41,6 +42,7 @@ function App() {
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState(null) // думаю можно из user тащить эту информацию. надо будет проверить
+  const history = useHistory();
 
   // обработка попапов
   function closeAllPopups() {
@@ -48,6 +50,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddMestoPopupOpen(false);
     setIsDeleteMestoPopupOpen(false);
+    setIsInfoTooltipOpen(false);
     setSelectedCard(null)
   }
 
@@ -130,8 +133,24 @@ function App() {
   }
 
   // обработка авторизации и деавторизации пользователя
-  function handleRegistration() {
-    console.log('тык')
+  function handleRegistration(email, password) {
+    console.log('Registering...')
+    auth.signup(email, password)
+      .then((response) => {
+        console.log(
+          `Success! Registerd as ${response.data.email} with pwd ${password}. 
+           User id is ${response.data._id}`
+        );
+        setIsAuthSuccessful(true);
+        setIsInfoTooltipOpen(true);
+        history.push('/sign-in');
+      })
+      .catch((error) => {
+        console.log(`Registration failed with response ${error}`)
+        setIsAuthSuccessful(false);
+        setIsInfoTooltipOpen(true);
+        console.log(error)
+      })
   }
 
   function handleLogin() {
@@ -141,6 +160,21 @@ function App() {
   function handleSignOut() {
     console.log('хрюк')
   }
+
+  // проверка токена
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.me(token)
+        .then(({email, _id}) => {
+          console.log('Logged in: ', email, _id)
+          setIsLoggedIn(true);
+          setUserEmail(email);
+          history.push('/');
+        })
+        .catch(console.log)
+    }
+  });
 
   return (
     <CurrentUserContext.Provider value={user}>
