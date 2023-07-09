@@ -27,7 +27,7 @@
 ## Нужные ссылки
 
 **Посмотреть онлайн**
-[можно по ссылке](https://denisilyushin.github.io/mesto-react/),
+[можно по ссылке](https://denisilyushin.github.io/react-mesto-auth/),
 
 **Figma**
 - [Модификация макета 7 спринт](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)

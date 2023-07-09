@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Учебный проект, курс WEB-разработчик, спринт 12",
   "private": true,
-  "homepage": "http://denisilyushin.github.io/mesto-react/",
+  "homepage": "http://denisilyushin.github.io/react-mesto-auth/",
   "keywords": [
     "JS",
     "HTML5",
