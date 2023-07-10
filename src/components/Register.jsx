@@ -10,7 +10,7 @@ export default function Register(
     tip
   }
 ) {
-  const {values, handleChange, errors, isValid, resetForm} = useValidate()
+  const {values, errors, isValid,  handleChange, resetForm} = useValidate()
 
   function handleSubmit() {
     onRegistration(values.email, values.password)
