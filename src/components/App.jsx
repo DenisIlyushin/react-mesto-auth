@@ -2,7 +2,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Main from './Main.jsx';
 import {useEffect, useState} from 'react';
-import {Route, Switch, useHistory} from 'react-router-dom'
+import {Navigate, Route, Routes, useNavigate} from 'react-router-dom';
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import ImagePopup from './ImagePopup.jsx';
 import api from '../utils/api.js';
@@ -29,16 +29,16 @@ function App() {
   const [cardToDelete, setCardToDelete] = useState(null);
   const [isSuccessInfoTooltipStatus, setIsSuccessInfoTooltipStatus] = useState(false)
   //обработка состояния загрузки
-  const [isDeleteMestoLoading, setIsDeleteMestoLoading ] = useState(false)
-  const [isProfileUpdateLoading, setIsProfileUpdateLoading ] = useState(false)
-  const [isAvatarUpdateLoading, setIsAvatarUpdateLoading ] = useState(false)
-  const [isMestoAddLoading, setIsMestoAddLoading ] = useState(false)
-  const [isRegistrationLoading, setIsRegistrationLoading ] = useState(false)
-  const [isLoginLoading, setIsLoginLoading ] = useState(false)
+  const [isDeleteMestoLoading, setIsDeleteMestoLoading] = useState(false)
+  const [isProfileUpdateLoading, setIsProfileUpdateLoading] = useState(false)
+  const [isAvatarUpdateLoading, setIsAvatarUpdateLoading] = useState(false)
+  const [isMestoAddLoading, setIsMestoAddLoading] = useState(false)
+  const [isRegistrationLoading, setIsRegistrationLoading] = useState(false)
+  const [isLoginLoading, setIsLoginLoading] = useState(false)
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('')
-  const history = useHistory();
+  const navigate = useNavigate();
   // контекст пользователя
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -148,7 +148,7 @@ function App() {
       .then((response) => {
         setIsSuccessInfoTooltipStatus(true);
         setIsInfoTooltipOpen(true);
-        history.push('/sign-in');
+        navigate('/sign-in')
       })
       .catch((error) => {
         setIsSuccessInfoTooltipStatus(false);
@@ -165,7 +165,7 @@ function App() {
         if (token) {
           localStorage.setItem('token', token);
           setIsLoggedIn(true);
-          history.push('/');
+          navigate('/')
         }
       })
       .catch((error) => {
@@ -179,7 +179,7 @@ function App() {
   function handleSignOut() {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
-    history.push('/sign-in')
+    navigate('/sign-in')
   }
 
   // проверка токена
@@ -190,7 +190,7 @@ function App() {
         .then((response) => {
           setIsLoggedIn(true);
           setUserEmail(response.data.email);
-          history.push('/');
+          navigate('/')
         })
         .catch(console.log)
     }
@@ -205,55 +205,56 @@ function App() {
           profileEmail={userEmail}
           onSignOut={handleSignOut}
         />
-        <Switch>
+        <Routes>
           <Route
-            path='/sign-in'
-          >
-            <Login
-              onLogin={handleLogin}
-              title={'Вход'}
-              buttonTitle={'Войти'}
-              isLoading={isLoginLoading}
-            />
-          </Route>
+            path="/sign-in"
+            element={
+              <Login
+                onLogin={handleLogin}
+                title={'Вход'}
+                buttonTitle={'Войти'}
+                isLoading={isLoginLoading}
+              />
+            }
+          />
           <Route
             path="/sign-up"
-          >
-            <Register
-              onRegistration={handleRegistration}
-              title={'Регистрация'}
-              buttonTitle={'Зарегистрироваться'}
-              isLoading={isRegistrationLoading}
-              // tip={
-              //   <p className={'auth__tip'}>
-              //     Уже зарегистрированы?&nbsp;
-              //     <Link
-              //       className='auth__link'
-              //       to='/sign-in'
-              //     >
-              //       Войти
-              //     </Link>
-              //   </p>
-              // }
-            />
-          </Route>
+            element={
+              <Register
+                onRegistration={handleRegistration}
+                title={'Регистрация'}
+                buttonTitle={'Зарегистрироваться'}
+                isLoading={isRegistrationLoading}
+              />
+            }
+          />
           <Route
-            path="/*"
-          >
-            <ProtectedRoute
-              component={Main}
-              isLoggedIn={isLoggedIn}
-              onUserAvatarEdit={handleUpdateAvatarPopup}
-              onUserProfileEdit={handleEditProfilePopup}
-              onMestoAdd={handleAddMestoPopup}
-              onMestoDelete={handleDeleteConfirm}
-              onMestoShow={setSelectedCard}
-              onMestoLike={handleLikeClick}
-              onMestoDislike={handleDislikeClick}
-              cards={initialCards}
-            />
-          </Route>
-        </Switch>
+            path="/"
+            element={
+              <ProtectedRoute
+                component={Main}
+                isLoggedIn={isLoggedIn}
+                onUserAvatarEdit={handleUpdateAvatarPopup}
+                onUserProfileEdit={handleEditProfilePopup}
+                onMestoAdd={handleAddMestoPopup}
+                onMestoDelete={handleDeleteConfirm}
+                onMestoShow={setSelectedCard}
+                onMestoLike={handleLikeClick}
+                onMestoDislike={handleDislikeClick}
+                cards={initialCards}
+              />
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <Navigate
+                to="/"
+                replace
+              />
+            }
+          />
+        </Routes>
         <Footer/>
         <EditAvatarPopup
           isOpen={isUpdateAvatarPopupOpen}
@@ -287,7 +288,7 @@ function App() {
         />
         <InfoTooltipOpen
           onClose={closeAllPopups}
-          popupType='infoTooltip'
+          popupType="infoTooltip"
           isOpen={isInfoTooltipOpen}
           isSuccess={isSuccessInfoTooltipStatus}
         />
