@@ -28,7 +28,7 @@ function App() {
   const [initialCards, setInitialCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
-  const [isAuthSuccessful, setIsAuthSuccessful] = useState(false)
+  const [isSuccessInfoTooltipStatus, setIsSuccessInfoTooltipStatus] = useState(false)
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('')
@@ -140,12 +140,12 @@ function App() {
     setIsLoading(true);
     auth.signUp(email, password)
       .then((response) => {
-        setIsAuthSuccessful(true);
+        setIsSuccessInfoTooltipStatus(true);
         setIsInfoTooltipOpen(true);
         history.push('/sign-in');
       })
       .catch((error) => {
-        setIsAuthSuccessful(false);
+        setIsSuccessInfoTooltipStatus(false);
         setIsInfoTooltipOpen(true);
         console.log(error)
       })
@@ -163,7 +163,7 @@ function App() {
         }
       })
       .catch((error) => {
-        setIsAuthSuccessful(false);
+        setIsSuccessInfoTooltipStatus(false);
         setIsInfoTooltipOpen(true);
         console.log(error)
       })
@@ -281,7 +281,7 @@ function App() {
           onClose={closeAllPopups}
           popupType='infoTooltip'
           isOpen={isInfoTooltipOpen}
-          isSuccess={isAuthSuccessful}
+          isSuccess={isSuccessInfoTooltipStatus}
         />
       </div>
     </ CurrentUserContext.Provider>);
