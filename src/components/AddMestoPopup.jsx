@@ -21,7 +21,6 @@ export default function AddMestoPopup({ isOpen, onClose, onSubmit, processStatus
       name: values.name,
       link: values.link
     });
-    resetForm()
   }
 
   return (

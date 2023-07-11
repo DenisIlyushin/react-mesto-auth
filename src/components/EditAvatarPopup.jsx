@@ -26,7 +26,6 @@ export default function EditAvatarPopup(
     onUpdate({
       avatar: values.avatar
     });
-    resetForm()
   }
 
   return (

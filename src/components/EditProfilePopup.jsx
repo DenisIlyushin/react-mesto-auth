@@ -31,7 +31,6 @@ export default function EditProfilePopup(
       name: values.name,
       about: values.job
     });
-    resetForm()
   }
 
   return (
