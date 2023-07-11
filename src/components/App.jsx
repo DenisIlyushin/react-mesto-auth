@@ -238,7 +238,7 @@ function App() {
             />
           </Route>
           <Route
-            path="/"
+            path="/*"
           >
             <ProtectedRoute
               component={Main}
