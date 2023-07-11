@@ -233,7 +233,7 @@ function App() {
           >
             <ProtectedRoute
               component={Main}
-              isloggedIn={isLoggedIn}
+              isLoggedIn={isLoggedIn}
               onUserAvatarEdit={handleUpdateAvatarPopup}
               onUserProfileEdit={handleEditProfilePopup}
               onMestoAdd={handleAddMestoPopup}
