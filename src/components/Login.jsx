@@ -44,7 +44,8 @@ export default function Login(
       <label className="form__input-label">
         <input
           className="form__input form__input_type_auth"
-          type="loginPassword"
+          id="loginPassword"
+          type="password"
           name="password"
           placeholder="Пароль"
           value={values.password || ''}
