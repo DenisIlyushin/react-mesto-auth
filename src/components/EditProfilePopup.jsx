@@ -9,7 +9,8 @@ export default function EditProfilePopup(
     onClose,
     onUpdate,
     processStatus
-  }) {
+  }
+  ) {
   const currentUser = useContext(CurrentUserContext);
   const {values, errors, isValid, setValues, handleChange, resetForm} = useValidate()
 

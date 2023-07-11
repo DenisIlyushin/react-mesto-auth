@@ -26,9 +26,15 @@ function App() {
   //обработка данных
   const [selectedCard, setSelectedCard] = useState(null);
   const [initialCards, setInitialCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
   const [isSuccessInfoTooltipStatus, setIsSuccessInfoTooltipStatus] = useState(false)
+  //обработка состояния загрузки
+  const [isDeleteMestoLoading, setIsDeleteMestoLoading ] = useState(false)
+  const [isProfileUpdateLoading, setIsProfileUpdateLoading ] = useState(false)
+  const [isAvatarUpdateLoading, setIsAvatarUpdateLoading ] = useState(false)
+  const [isMestoAddLoading, setIsMestoAddLoading ] = useState(false)
+  const [isRegistrationLoading, setIsRegistrationLoading ] = useState(false)
+  const [isLoginLoading, setIsLoginLoading ] = useState(false)
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('')
@@ -92,52 +98,52 @@ function App() {
   }
 
   function handleDeleteMesto(card) {
-    setIsLoading(true)
+    setIsDeleteMestoLoading(true)
     api.deleteCard(card._id)
       .then(() => {
         setInitialCards((state) => state.filter(c => c._id !== (card._id)));
         closeAllPopups()
       })
       .catch(console.log)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsDeleteMestoLoading(false))
   }
 
   function handleProfileUpdate(info) {
-    setIsLoading(true)
+    setIsProfileUpdateLoading(true)
     api.setUserInfo(info)
       .then(userInfo => {
         setUser(userInfo);
         closeAllPopups()
       })
       .catch(console.log)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsProfileUpdateLoading(false))
   }
 
   function handleAvatarUpdate(info) {
-    setIsLoading(true)
+    setIsAvatarUpdateLoading(true)
     api.setUserAvatar(info)
       .then(userInfo => {
         setUser(userInfo);
         closeAllPopups()
       })
       .catch(console.log)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsAvatarUpdateLoading(false))
   }
 
   function handleMestoAdd(data) {
-    setIsLoading(true)
+    setIsMestoAddLoading(true)
     api.createMesto(data)
       .then((card) => {
         setInitialCards([card, ...initialCards]);
         closeAllPopups()
       })
       .catch(console.log)
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsMestoAddLoading(false))
   }
 
   // обработка авторизации и деавторизации пользователя
   function handleRegistration(email, password) {
-    setIsLoading(true);
+    setIsRegistrationLoading(true);
     auth.signUp(email, password)
       .then((response) => {
         setIsSuccessInfoTooltipStatus(true);
@@ -149,11 +155,11 @@ function App() {
         setIsInfoTooltipOpen(true);
         console.log(error)
       })
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsRegistrationLoading(false))
   }
 
   function handleLogin(email, password) {
-    setIsLoading(true);
+    setIsLoginLoading(true);
     auth.signIn(email, password)
       .then(({token}) => {
         if (token) {
@@ -167,7 +173,7 @@ function App() {
         setIsInfoTooltipOpen(true);
         console.log(error)
       })
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsLoginLoading(false))
   }
 
   function handleSignOut() {
@@ -207,7 +213,7 @@ function App() {
               onLogin={handleLogin}
               title={'Вход'}
               buttonTitle={'Войти'}
-              isLoading={isLoading}
+              isLoading={isLoginLoading}
             />
           </Route>
           <Route
@@ -217,7 +223,7 @@ function App() {
               onRegistration={handleRegistration}
               title={'Регистрация'}
               buttonTitle={'Зарегистрироваться'}
-              isLoading={isLoading}
+              isLoading={isRegistrationLoading}
               tip={
                 <p className={'auth__tip'}>
                   Уже зарегистрированы?&nbsp;
@@ -253,24 +259,26 @@ function App() {
           isOpen={isUpdateAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdate={handleAvatarUpdate}
+          processStatus={isAvatarUpdateLoading}
         />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdate={handleProfileUpdate}
+          processStatus={isProfileUpdateLoading}
         />
         <AddMestoPopup
           isOpen={isAddMestoPopupOpen}
           onClose={closeAllPopups}
           onSubmit={handleMestoAdd}
-          processStatus={isLoading}
+          processStatus={isMestoAddLoading}
         />
         <ConfirmMestoDeletePopup
           isOpen={isDeleteMestoPopupOpen}
           onClose={closeAllPopups}
           onSubmit={handleDeleteMesto}
           card={cardToDelete}
-          processStatus={isLoading}
+          processStatus={isDeleteMestoLoading}
         />
         <ImagePopup
           popupType={'show-mesto'}

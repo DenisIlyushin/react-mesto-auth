@@ -2,7 +2,14 @@ import PopupWithForm from './PopupWithForm.jsx';
 import {useEffect} from 'react';
 import useValidate from '../hooks/useValidate.jsx';
 
-export default function EditAvatarPopup({ isOpen, onClose, onUpdate, processStatus }) {
+export default function EditAvatarPopup(
+  {
+    isOpen,
+    onClose,
+    onUpdate,
+    processStatus
+  }
+  ) {
   const {values,  errors, isValid, setValues, resetForm, handleChange} = useValidate()
 
   useEffect(() => {
