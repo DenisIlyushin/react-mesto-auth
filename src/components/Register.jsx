@@ -34,6 +34,7 @@ export default function Register(
           placeholder="Email"
           value={values.email || ''}
           onChange={handleChange}
+          required={true}
         />
         <span
           className={`form__input-error ${isValid ? '' : 'form__input-error_active'}`}
@@ -50,6 +51,7 @@ export default function Register(
           placeholder="Пароль"
           value={values.password || ''}
           onChange={handleChange}
+          required={true}
         />
         <span
           className={`form__input-error ${isValid ? '' : 'form__input-error_active'}`}
