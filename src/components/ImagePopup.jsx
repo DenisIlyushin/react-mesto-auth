@@ -11,9 +11,8 @@ export default function ImagePopup(
 
   useCloseOnEsc({isOpen, onClose})
 
-  function handleClose(event) {
-    if (event.target.classList.contains('popup_opened')
-      || event.target.classList.contains('popup__close-button')) {
+  function handleCloseOnOverlay(event) {
+    if (event.target.classList.contains('popup_opened')) {
       return onClose()
     }
   }
@@ -24,11 +23,11 @@ export default function ImagePopup(
         `popup popup_type_${popupType} 
       ${isOpen ? 'popup_opened' : ''}`
       } id="showMesto"
-      onClick={handleClose}
+      onClick={handleCloseOnOverlay}
     >
       <div className="popup__container-mesto">
         <button
-          onClick={handleClose}
+          onClick={onClose}
           className="popup__close-button"
           type="button"
         />
