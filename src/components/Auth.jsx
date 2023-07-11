@@ -15,9 +15,9 @@ export default function Auth(
     onSubmit()
   }
 
-  function getFormFieldsByTag(tag) {
+  function getFormFieldsByType(type) {
     return React.Children.map(children, (child => {
-      if (child.type === tag) return child;
+      if (child.type === type) return child;
       return null;
     }));
   }
@@ -31,7 +31,7 @@ export default function Auth(
         >
           <h2 className="form__title form__title_type_auth">{title}</h2>
           {
-            getFormFieldsByTag('label')
+            getFormFieldsByType('label')
           }
           <button
             className={
@@ -48,7 +48,7 @@ export default function Auth(
             }
           </button>
           {
-            getFormFieldsByTag('p')
+            getFormFieldsByType('p')
           }
         </form>
       </div>
