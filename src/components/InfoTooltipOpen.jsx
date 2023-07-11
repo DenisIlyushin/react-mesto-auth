@@ -1,19 +1,16 @@
 import useCloseOnEsc from '../hooks/useCloseOnEsc.jsx';
-import successImage from '../images/tooltip-success.svg';
-import failImage from '../images/tooltip-fail.svg'
 
 export default function InfoTooltipOpen(
   {
-    isOpen,
+    info: {isOpen, image, alt, title},
     onClose,
     popupType,
-    isSuccess
   }
 ) {
-
-  useCloseOnEsc({ isOpen, onClose })
+  useCloseOnEsc({isOpen, onClose});
 
   function handleClose(event) {
+    console.log('ns')
     if (event.target.classList.contains('popup_opened')
       || event.target.classList.contains('popup__close-button')) {
       return onClose()
@@ -24,7 +21,11 @@ export default function InfoTooltipOpen(
     <div
       className={
         `popup popup_type_${popupType} 
-      ${isOpen && 'popup_opened'}`
+      ${
+          isOpen
+            ? 'popup_opened'
+            : ''
+        }`
       } id="updateAvatar"
       onClick={handleClose}
     >
@@ -35,32 +36,21 @@ export default function InfoTooltipOpen(
           type="button"
         />
         <div
-          className='popup__tooltip-content'
+          className="popup__tooltip-content"
         >
-          <img
-            className='popup__tooltip-image'
-            src={
-              isSuccess
-                ? successImage
-                : failImage
-            }
-            alt={
-              isSuccess
-                ? 'Успешная регистрация, знак галочка'
-                : 'Регистрация прошла не успешно, знак крестика'
-            }
-          />
+          {image
+            && <img
+              className="popup__tooltip-image"
+              src={image}
+              alt={alt}
+            />
+          }
           <h2
-            className='popup__tooltip-header'
+            className="popup__tooltip-header"
           >
-            {
-              isSuccess
-                ? 'Вы успешно зарегистрировались!'
-                : 'Что-то пошло не так! Попробуйте ещё раз.'
-            }
+            {title}
           </h2>
         </div>
-
       </div>
     </div>
   )

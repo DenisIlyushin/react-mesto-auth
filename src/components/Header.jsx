@@ -38,7 +38,7 @@ export default function Header(
           }
         />
         <Route
-        path='/'
+        path='/*'
         element={
           <nav
             className="header__menu">

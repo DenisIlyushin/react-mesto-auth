@@ -15,6 +15,8 @@ import Register from './Register.jsx';
 import Login from './Login.jsx';
 import InfoTooltipOpen from './InfoTooltipOpen.jsx';
 import auth from '../utils/auth.js';
+import successImage from '../images/tooltip-success.svg';
+import failImage from '../images/tooltip-fail.svg'
 
 function App() {
   //обработка попапов
@@ -27,7 +29,6 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [initialCards, setInitialCards] = useState([]);
   const [cardToDelete, setCardToDelete] = useState(null);
-  const [isSuccessInfoTooltipStatus, setIsSuccessInfoTooltipStatus] = useState(false)
   //обработка состояния загрузки
   const [isDeleteMestoLoading, setIsDeleteMestoLoading] = useState(false)
   const [isProfileUpdateLoading, setIsProfileUpdateLoading] = useState(false)
@@ -35,6 +36,13 @@ function App() {
   const [isMestoAddLoading, setIsMestoAddLoading] = useState(false)
   const [isRegistrationLoading, setIsRegistrationLoading] = useState(false)
   const [isLoginLoading, setIsLoginLoading] = useState(false)
+  // обработка модальных окон InfoToolTip
+  const [tooltipInfo, setTooltipInfo] = useState({
+    isOpen: false,
+    image: null,
+    alt: '',
+    title: ''
+  })
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('')
@@ -59,7 +67,13 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddMestoPopupOpen(false);
     setIsDeleteMestoPopupOpen(false);
-    setIsInfoTooltipOpen(false);
+    // setIsInfoTooltipOpen(false);
+    setTooltipInfo({
+      isOpen: false,
+      image: null,
+      alt: '',
+      title: ''
+    })
     setSelectedCard(null)
   }
 
@@ -146,13 +160,21 @@ function App() {
     setIsRegistrationLoading(true);
     auth.signUp(email, password)
       .then(() => {
-        setIsSuccessInfoTooltipStatus(true);
-        setIsInfoTooltipOpen(true);
+        setTooltipInfo({
+          isOpen: true,
+          image: successImage,
+          alt: 'Успех регистрации, знак галочка',
+          title: 'Вы успешно зарегистрировались!'
+        })
         navigate('/sign-in')
       })
       .catch((error) => {
-        setIsSuccessInfoTooltipStatus(false);
-        setIsInfoTooltipOpen(true);
+        setTooltipInfo({
+          isOpen: true,
+          image: failImage,
+          alt: 'Провал регистрации, знак крестика',
+          title: 'Что-то пошло не так! Попробуйте ещё раз.'
+        })
         console.log(error)
       })
       .finally(() => setIsRegistrationLoading(false))
@@ -169,8 +191,12 @@ function App() {
         }
       })
       .catch((error) => {
-        setIsSuccessInfoTooltipStatus(false);
-        setIsInfoTooltipOpen(true);
+        setTooltipInfo({
+          isOpen: true,
+          image: failImage,
+          alt: 'Провал авторизации, знак крестика',
+          title: 'Что-то пошло не так! Попробуйте ещё раз.'
+        })
         console.log(error)
       })
       .finally(() => setIsLoginLoading(false))
@@ -229,7 +255,7 @@ function App() {
             }
           />
           <Route
-            path="/"
+            path="/*"
             element={
               <ProtectedRoute
                 component={Main}
@@ -242,15 +268,6 @@ function App() {
                 onMestoLike={handleLikeClick}
                 onMestoDislike={handleDislikeClick}
                 cards={initialCards}
-              />
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <Navigate
-                to="/"
-                replace
               />
             }
           />
@@ -287,10 +304,9 @@ function App() {
           onClose={closeAllPopups}
         />
         <InfoTooltipOpen
+          info={tooltipInfo}
           onClose={closeAllPopups}
           popupType="infoTooltip"
-          isOpen={isInfoTooltipOpen}
-          isSuccess={isSuccessInfoTooltipStatus}
         />
       </div>
     </ CurrentUserContext.Provider>);
