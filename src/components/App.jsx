@@ -2,7 +2,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Main from './Main.jsx';
 import {useEffect, useState} from 'react';
-import {Navigate, Route, Routes, useNavigate} from 'react-router-dom';
+import {Route, Routes, useNavigate} from 'react-router-dom';
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import ImagePopup from './ImagePopup.jsx';
 import api from '../utils/api.js';
@@ -24,7 +24,6 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddMestoPopupOpen, setIsAddMestoPopupOpen] = useState(false);
   const [isDeleteMestoPopupOpen, setIsDeleteMestoPopupOpen] = useState(false);
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   //обработка данных
   const [selectedCard, setSelectedCard] = useState(null);
   const [initialCards, setInitialCards] = useState([]);
