@@ -13,8 +13,7 @@ export default function Register(
   const {values, errors, isValid,  handleChange, resetForm} = useValidate()
 
   function handleSubmit() {
-    onRegistration(values.email, values.password);
-    resetForm()
+    onRegistration(values.email, values.password)
   }
 
   return (
