@@ -41,7 +41,7 @@ function App() {
   }, [])
   // обработка авторизации
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState(null)
+  const [userEmail, setUserEmail] = useState('')
   const history = useHistory();
 
   // обработка попапов
