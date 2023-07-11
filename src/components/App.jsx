@@ -186,6 +186,7 @@ function App() {
         if (token) {
           localStorage.setItem('token', token);
           setIsLoggedIn(true);
+          setUserEmail(email);
           navigate('/')
         }
       })
