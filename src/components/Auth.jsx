@@ -1,18 +1,26 @@
+import React from 'react';
+
 export default function Auth(
   {
     onSubmit,
     title,
     buttonTitle,
-    tip,
     isValid,
     isLoading,
     children,
   }
 ) {
-
   function handleSubmit(event) {
     event.preventDefault();
     onSubmit()
+  }
+
+  function getFormFieldsByTag(tag) {
+    const child = React.Children.map(children, (child => {
+      if (child.type === tag) return child;
+      return null;
+    }))
+    return child;
   }
 
   return (
@@ -23,7 +31,9 @@ export default function Auth(
           onSubmit={handleSubmit}
         >
           <h2 className="form__title form__title_type_auth">{title}</h2>
-          {children}
+          {
+            getFormFieldsByTag('label')
+          }
           <button
             className={
               `form__submit-button 
@@ -38,7 +48,9 @@ export default function Auth(
                 : buttonTitle
             }
           </button>
-          {tip}
+          {
+            getFormFieldsByTag('p')
+          }
         </form>
       </div>
     </div>

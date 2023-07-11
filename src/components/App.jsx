@@ -2,7 +2,7 @@ import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import Main from './Main.jsx';
 import {useEffect, useState} from 'react';
-import {Link, Route, Switch, useHistory} from 'react-router-dom'
+import {Route, Switch, useHistory} from 'react-router-dom'
 import {CurrentUserContext} from '../context/CurrentUserContext';
 import ImagePopup from './ImagePopup.jsx';
 import api from '../utils/api.js';
@@ -224,17 +224,17 @@ function App() {
               title={'Регистрация'}
               buttonTitle={'Зарегистрироваться'}
               isLoading={isRegistrationLoading}
-              tip={
-                <p className={'auth__tip'}>
-                  Уже зарегистрированы?&nbsp;
-                  <Link
-                    className='auth__link'
-                    to='/sign-in'
-                  >
-                    Войти
-                  </Link>
-                </p>
-              }
+              // tip={
+              //   <p className={'auth__tip'}>
+              //     Уже зарегистрированы?&nbsp;
+              //     <Link
+              //       className='auth__link'
+              //       to='/sign-in'
+              //     >
+              //       Войти
+              //     </Link>
+              //   </p>
+              // }
             />
           </Route>
           <Route

@@ -1,5 +1,6 @@
 import Auth from './Auth.jsx';
 import useValidate from '../hooks/useValidate.jsx';
+import {Link} from 'react-router-dom';
 
 export default function Register(
   {
@@ -7,7 +8,6 @@ export default function Register(
     title,
     buttonTitle,
     isLoading,
-    tip
   }
 ) {
   const {values, errors, isValid,  handleChange} = useValidate()
@@ -23,7 +23,6 @@ export default function Register(
       buttonTitle={buttonTitle}
       isValid={isValid}
       isLoading={isLoading}
-      tip={tip}
     >
       <label className="form__input-label">
         <input
@@ -59,6 +58,15 @@ export default function Register(
           {errors.password}
         </span>
       </label>
+      <p className={'auth__tip'}>
+        Уже зарегистрированы?&nbsp;
+        <Link
+          className='auth__link'
+          to='/sign-in'
+        >
+          Войти
+        </Link>
+      </p>
     </Auth>
   )
 }
