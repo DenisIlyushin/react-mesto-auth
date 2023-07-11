@@ -14,7 +14,7 @@ class Auth {
     return Promise.reject(response.status);
   };
 
-  signup(email, password) {
+  signUp(email, password) {
     return fetch(`${this.#baseUrl}/signup`, {
         method: 'POST',
         headers: this.#headers,
@@ -27,7 +27,7 @@ class Auth {
       .then(this.#handleResponse);
   }
 
-  signin(email, password) {
+  signIn(email, password) {
     return fetch(`${this.#baseUrl}/signin`, {
         method: 'POST',
         headers: this.#headers,

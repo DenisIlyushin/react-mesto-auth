@@ -135,7 +135,7 @@ function App() {
   // обработка авторизации и деавторизации пользователя
   function handleRegistration(email, password) {
     setIsLoading(true);
-    auth.signup(email, password)
+    auth.signUp(email, password)
       .then((response) => {
         setIsAuthSuccessful(true);
         setIsInfoTooltipOpen(true);
@@ -151,7 +151,7 @@ function App() {
 
   function handleLogin(email, password) {
     setIsLoading(true);
-    auth.signin(email, password)
+    auth.signIn(email, password)
       .then(({token}) => {
         if (token) {
           localStorage.setItem('token', token);
