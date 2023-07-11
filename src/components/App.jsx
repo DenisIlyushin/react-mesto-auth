@@ -113,8 +113,8 @@ function App() {
   function handleAvatarUpdate(info) {
     setIsLoading(true)
     api.setUserAvatar(info)
-      .then(avatar => {
-        setUser(avatar);
+      .then(userInfo => {
+        setUser(userInfo);
         closeAllPopups()
       })
       .catch(console.log)
