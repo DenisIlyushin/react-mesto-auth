@@ -29,20 +29,23 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
   const [isAuthSuccessful, setIsAuthSuccessful] = useState(false)
+  // обработка авторизации
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState('')
+  const history = useHistory();
   // контекст пользователя
   const [user, setUser] = useState(null);
   useEffect(() => {
+    if (!isLoggedIn) {
+      return
+    }
     Promise.all([api.getUserInfo(), api.getCards()])
       .then(([userInfo, cards]) => {
         setUser(userInfo);
         setInitialCards(cards);
       })
       .catch(console.log)
-  }, [])
-  // обработка авторизации
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState('')
-  const history = useHistory();
+  }, [isLoggedIn])
 
   // обработка попапов
   function closeAllPopups() {
