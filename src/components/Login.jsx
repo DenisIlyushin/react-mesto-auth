@@ -9,11 +9,10 @@ export default function Login(
     isLoading
   }
 ) {
-  const {values, errors, isValid, handleChange, resetForm} = useValidate()
+  const {values, errors, isValid, handleChange} = useValidate()
 
   function handleSubmit() {
     onLogin(values.email, values.password);
-    resetForm()
   }
 
   return (
