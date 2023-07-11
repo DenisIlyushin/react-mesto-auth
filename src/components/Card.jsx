@@ -31,7 +31,7 @@ export default function Card(
   }
 
   return (
-    <li className="mesto">
+    <>
       {isOwn && <button
         onClick={handleCardDelete}
         className="mesto__delete-button"
@@ -55,6 +55,6 @@ export default function Card(
           <span className="mesto__like-count">{card.likes.length ?? 0}</span>
         </div>
       </div>
-    </li>
+    </>
   )
 }

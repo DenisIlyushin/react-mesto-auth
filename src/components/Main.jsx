@@ -61,14 +61,18 @@ export default function Main(
       >
         <ul className="places__list">
           {cards.map((mesto) => (
-            <Card
+            <li
               key={mesto._id}
-              card={mesto}
-              onShow={onMestoShow}
-              onDelete={onMestoDelete}
-              onLike={onMestoLike}
-              onDislike={onMestoDislike}
-            />
+              className="mesto"
+            >
+              <Card
+                card={mesto}
+                onShow={onMestoShow}
+                onDelete={onMestoDelete}
+                onLike={onMestoLike}
+                onDislike={onMestoDislike}
+              />
+            </li>
           ))}
         </ul>
       </section>
