@@ -16,11 +16,10 @@ export default function Auth(
   }
 
   function getFormFieldsByTag(tag) {
-    const child = React.Children.map(children, (child => {
+    return React.Children.map(children, (child => {
       if (child.type === tag) return child;
       return null;
-    }))
-    return child;
+    }));
   }
 
   return (
