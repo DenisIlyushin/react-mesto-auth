@@ -38,23 +38,23 @@ export default function Header(
           }
         />
         <Route
-        path='/*'
-        element={
-          <nav
-            className="header__menu">
+          path="/*"
+          element={
+            <nav
+              className="header__menu">
           <span
             className="header__profile-info"
           >
             {profileEmail}
           </span>
-            <button
-              className="header__signout-button"
-              onClick={() => onSignOut()}
-            >
-              Выйти
-            </button>
-          </nav>
-        }
+              <button
+                className="header__signout-button"
+                onClick={() => onSignOut()}
+              >
+                Выйти
+              </button>
+            </nav>
+          }
         />
       </Routes>
     </header>

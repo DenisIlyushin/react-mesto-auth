@@ -10,7 +10,7 @@ export default function Register(
     isLoading,
   }
 ) {
-  const {values, errors, isValid,  handleChange} = useValidate()
+  const {values, errors, isValid, handleChange} = useValidate()
 
   function handleSubmit() {
     onRegistration(values.email, values.password)
@@ -61,8 +61,8 @@ export default function Register(
       <p className={'auth__tip'}>
         Уже зарегистрированы?&nbsp;
         <Link
-          className='auth__link'
-          to='/sign-in'
+          className="auth__link"
+          to="/sign-in"
         >
           Войти
         </Link>

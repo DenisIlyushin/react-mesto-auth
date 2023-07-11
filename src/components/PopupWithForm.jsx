@@ -13,7 +13,7 @@ export default function PopupWithForm(
   }
 ) {
 
-  useCloseOnEsc({ isOpen, onClose })
+  useCloseOnEsc({isOpen, onClose})
 
   function handleClose(event) {
     if (event.target.classList.contains('popup_opened')

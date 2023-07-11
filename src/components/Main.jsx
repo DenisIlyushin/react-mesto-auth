@@ -1,6 +1,6 @@
 import Card from './Card.jsx';
-import { CurrentUserContext } from '../context/CurrentUserContext.jsx';
-import { useContext } from "react";
+import {CurrentUserContext} from '../context/CurrentUserContext.jsx';
+import {useContext} from 'react';
 
 
 export default function Main(
@@ -61,14 +61,14 @@ export default function Main(
       >
         <ul className="places__list">
           {cards.map((mesto) => (
-          <Card
-            key={mesto._id}
-            card={mesto}
-            onShow={onMestoShow}
-            onDelete={onMestoDelete}
-            onLike={onMestoLike}
-            onDislike={onMestoDislike}
-          />
+            <Card
+              key={mesto._id}
+              card={mesto}
+              onShow={onMestoShow}
+              onDelete={onMestoDelete}
+              onLike={onMestoLike}
+              onDislike={onMestoDislike}
+            />
           ))}
         </ul>
       </section>

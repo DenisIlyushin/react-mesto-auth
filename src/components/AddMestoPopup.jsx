@@ -2,7 +2,14 @@ import PopupWithForm from './PopupWithForm.jsx';
 import {useEffect} from 'react';
 import useValidate from '../hooks/useValidate.jsx';
 
-export default function AddMestoPopup({ isOpen, onClose, onSubmit, processStatus }) {
+export default function AddMestoPopup(
+  {
+    isOpen,
+    onClose,
+    onSubmit,
+    processStatus
+  }
+) {
   const {values, errors, isValid, setValues, handleChange, resetForm} = useValidate()
 
   useEffect(() => {

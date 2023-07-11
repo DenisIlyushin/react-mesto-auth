@@ -9,7 +9,7 @@ export default function ImagePopup(
 ) {
   let isOpen = !!card
 
-  useCloseOnEsc({ isOpen, onClose })
+  useCloseOnEsc({isOpen, onClose})
 
   function handleClose(event) {
     if (event.target.classList.contains('popup_opened')

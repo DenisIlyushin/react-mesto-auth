@@ -9,8 +9,8 @@ export default function EditAvatarPopup(
     onUpdate,
     processStatus
   }
-  ) {
-  const {values,  errors, isValid, setValues, resetForm, handleChange} = useValidate()
+) {
+  const {values, errors, isValid, setValues, resetForm, handleChange} = useValidate()
 
   useEffect(() => {
     setValues({
