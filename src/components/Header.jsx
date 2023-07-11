@@ -1,5 +1,5 @@
 import logo from '../images/logo-white.svg';
-import {Link, Route, Routes, useLocation} from 'react-router-dom';
+import {Link, Route, Routes} from 'react-router-dom';
 
 export default function Header(
   {
@@ -7,8 +7,6 @@ export default function Header(
     onSignOut
   }
 ) {
-  const location = useLocation()
-
   return (
     <header className="header">
       <img
@@ -39,24 +37,26 @@ export default function Header(
             </Link>
           }
         />
-      </Routes>
-      {
-        location.pathname === '/'
-        && <nav
-          className="header__menu">
+        <Route
+        path='/'
+        element={
+          <nav
+            className="header__menu">
           <span
             className="header__profile-info"
           >
             {profileEmail}
           </span>
-          <button
-            className="header__signout-button"
-            onClick={() => onSignOut()}
-          >
-            Выйти
-          </button>
-        </nav>
-      }
+            <button
+              className="header__signout-button"
+              onClick={() => onSignOut()}
+            >
+              Выйти
+            </button>
+          </nav>
+        }
+        />
+      </Routes>
     </header>
   )
 }
