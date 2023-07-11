@@ -13,5 +13,5 @@ export default function useCloseOnEsc({ isOpen, onClose }) {
     return () => {
       document.removeEventListener('keyup', handleCloseOnEsc)
     }
-  })
+  }, [isOpen])
 }
