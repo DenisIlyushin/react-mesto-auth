@@ -12,7 +12,7 @@ export default function Login(
   const {values, errors, isValid, handleChange, resetForm} = useValidate()
 
   function handleSubmit() {
-    onLogin(values.email, values.password)
+    onLogin(values.email, values.password);
     resetForm()
   }
 
