@@ -145,7 +145,7 @@ function App() {
   function handleRegistration(email, password) {
     setIsRegistrationLoading(true);
     auth.signUp(email, password)
-      .then((response) => {
+      .then(() => {
         setIsSuccessInfoTooltipStatus(true);
         setIsInfoTooltipOpen(true);
         navigate('/sign-in')
