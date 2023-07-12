@@ -69,8 +69,7 @@ function App() {
     // setIsInfoTooltipOpen(false);
     setTooltipInfo({
       isOpen: false,
-      image: null,
-      alt: '',
+      image: '',
       title: ''
     })
     setSelectedCard(null)
@@ -162,7 +161,6 @@ function App() {
         setTooltipInfo({
           isOpen: true,
           image: successImage,
-          alt: 'Успех регистрации, знак галочка',
           title: 'Вы успешно зарегистрировались!'
         })
         navigate('/sign-in')
@@ -171,7 +169,6 @@ function App() {
         setTooltipInfo({
           isOpen: true,
           image: failImage,
-          alt: 'Провал регистрации, знак крестика',
           title: 'Что-то пошло не так! Попробуйте ещё раз.'
         })
         console.log(error)
@@ -194,7 +191,6 @@ function App() {
         setTooltipInfo({
           isOpen: true,
           image: failImage,
-          alt: 'Провал авторизации, знак крестика',
           title: 'Что-то пошло не так! Попробуйте ещё раз.'
         })
         console.log(error)

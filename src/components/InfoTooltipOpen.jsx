@@ -2,7 +2,7 @@ import useCloseOnEsc from '../hooks/useCloseOnEsc.jsx';
 
 export default function InfoTooltipOpen(
   {
-    info: {isOpen, image, alt, title},
+    info: {isOpen, image, title},
     onClose,
     popupType,
   }
@@ -42,7 +42,7 @@ export default function InfoTooltipOpen(
             && <img
               className="popup__tooltip-image"
               src={image}
-              alt={alt}
+              alt={title}
             />
           }
           <h2
